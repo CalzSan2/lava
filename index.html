@@ -1,0 +1,78 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lava Rápido Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fas fa-car-wash header-icon"></i>
+            <h1>Meu Lava Rápido</h1>
+        </header>
+
+        <section class="form-section card">
+            <h2><i class="fas fa-plus-circle"></i> Registrar Nova Lavagem</h2>
+            <div class="input-group">
+                <label for="carName"><i class="fas fa-car"></i> Nome/Placa do Carro:</label>
+                <input type="text" id="carName" placeholder="Ex: Fusca Azul / ABC-1234">
+            </div>
+            <div class="input-group">
+                <label for="washType"><i class="fas fa-soap"></i> Tipo de Lavagem:</label>
+                <select id="washType">
+                    <option value="" data-price="0">-- Selecione --</option>
+                    <option value="Ducha" data-price="10">Ducha (R$ 10,00)</option>
+                    <option value="Superducha" data-price="25">Superducha (R$ 25,00)</option>
+                    <option value="Completa" data-price="45">Completa (R$ 45,00)</option>
+                </select>
+            </div>
+            <button id="addWash" class="btn btn-primary"><i class="fas fa-check"></i> Adicionar Lavagem</button>
+        </section>
+
+        <section class="list-section card">
+            <h2><i class="fas fa-list-ul"></i> Lavagens Registradas</h2>
+            <div class="table-container">
+                <table id="washTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-car"></i> Carro</th>
+                            <th><i class="fas fa-soap"></i> Tipo</th>
+                            <th><i class="fas fa-dollar-sign"></i> Preço (R$)</th>
+                            <th><i class="fas fa-credit-card"></i> Ações / Pagamento</th>
+                        </tr>
+                    </thead>
+                    <tbody id="washList">
+                        <!-- Lavagens adicionadas aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="total-section card">
+             <h2><i class="fas fa-cash-register"></i> Resumo do Caixa</h2>
+            <button id="closeRegister" class="btn btn-danger"><i class="fas fa-lock"></i> Fechar Caixa</button>
+             <div id="registerSummary" class="summary" style="margin-top: 15px; background-color: #fff3e0; border-left-color: var(--warning-color); display: none;">
+                 <!-- General closing summary will appear here -->
+                 <h3>Resumo Geral (Caixa Fechado)</h3>
+                 <div id="registerSummaryDetails"></div>
+             </div>
+            <div class="summary" id="liveSummary"> 
+                <p>Total de Carros Registrados: <strong id="totalCars">0</strong></p>
+                <p>Total Arrecadado (Estimado): R$ <strong id="totalRevenue">0,00</strong></p>
+            </div>
+             <div id="paymentSummary" class="summary" style="margin-top: 15px; background-color: #e3f2fd; border-left-color: var(--info-color); display: none;">
+                 <!-- Detailed payment summary will appear here after closing register -->
+                 <h3>Detalhes por Pagamento:</h3>
+                 <div id="paymentDetails"></div>
+             </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
