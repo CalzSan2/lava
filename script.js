@@ -4,60 +4,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const addWashButton = document.getElementById('addWash');
     const washListTableBody = document.getElementById('washList');
     const closeRegisterButton = document.getElementById('closeRegister');
+    const resetDayButton = document.getElementById('resetDay'); 
     const totalRevenueSpan = document.getElementById('totalRevenue');
     const totalCarsSpan = document.getElementById('totalCars');
     const paymentSummaryDiv = document.getElementById('paymentSummary');
     const paymentDetailsDiv = document.getElementById('paymentDetails');
-    const registerSummaryDiv = document.getElementById('registerSummary'); 
-    const registerSummaryDetailsDiv = document.getElementById('registerSummaryDetails'); 
-    const liveSummaryDiv = document.getElementById('liveSummary'); 
+    const registerSummaryDiv = document.getElementById('registerSummary');
+    const registerSummaryDetailsDiv = document.getElementById('registerSummaryDetails');
+    const liveSummaryDiv = document.getElementById('liveSummary');
+
+    const STORAGE_KEY_WASHES = 'carWashApp_washes';
+    const STORAGE_KEY_STATE = 'carWashApp_state';
 
     let recordedWashes = [];
     let totalRevenue = 0;
     let totalCars = 0;
-    let isRegisterClosed = false; 
+    let isRegisterClosed = false;
 
-    addWashButton.addEventListener('click', addWash);
-    closeRegisterButton.addEventListener('click', closeRegister);
-
-    function addWash() {
-        if (isRegisterClosed) {
-            alert("O caixa já foi fechado. Não é possível adicionar novas lavagens.");
-            return;
+    function saveData() {
+        try {
+            localStorage.setItem(STORAGE_KEY_WASHES, JSON.stringify(recordedWashes));
+            localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify({ isRegisterClosed }));
+        } catch (e) {
+            console.error("Failed to save data to localStorage", e);
+            alert("Não foi possível salvar os dados. O armazenamento local pode estar cheio ou indisponível.");
         }
-        const carName = carNameInput.value.trim();
-        const selectedOption = washTypeSelect.options[washTypeSelect.selectedIndex];
-        const washType = selectedOption.value;
-        const washPrice = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+    }
 
-        if (!carName) {
-            alert('Por favor, insira o nome ou placa do carro.');
-            carNameInput.focus();
-            return;
+    function loadData() {
+        try {
+            const savedWashes = localStorage.getItem(STORAGE_KEY_WASHES);
+            const savedState = localStorage.getItem(STORAGE_KEY_STATE);
+
+            if (savedWashes) {
+                recordedWashes = JSON.parse(savedWashes);
+            } else {
+                recordedWashes = [];
+            }
+
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                isRegisterClosed = state.isRegisterClosed || false;
+            } else {
+                isRegisterClosed = false;
+            }
+
+            washListTableBody.innerHTML = ''; 
+            recordedWashes.forEach((wash, index) => addWashToTable(wash, index));
+
+            updateLiveTotals();
+
+            if (isRegisterClosed) {
+                displayClosedState(); 
+            } else {
+                displayOpenState(); 
+            }
+
+        } catch (e) {
+            console.error("Failed to load data from localStorage", e);
+            recordedWashes = [];
+            isRegisterClosed = false;
+            alert("Não foi possível carregar os dados salvos. Começando um novo dia.");
+            localStorage.removeItem(STORAGE_KEY_WASHES);
+            localStorage.removeItem(STORAGE_KEY_STATE);
         }
-        if (!washType || washPrice <= 0) {
-            alert('Por favor, selecione um tipo de lavagem válido.');
-            washTypeSelect.focus();
-            return;
-        }
-
-        const washRecord = {
-            id: Date.now(),
-            car: carName,
-            type: washType,
-            price: washPrice,
-            paymentMethod: null
-        };
-
-        recordedWashes.push(washRecord);
-        const washIndex = recordedWashes.length - 1;
-
-        addWashToTable(washRecord, washIndex);
-        updateLiveTotals();
-        clearInputs();
-
-        console.log("Lavagem adicionada:", washRecord);
-        console.log("Lista atual:", recordedWashes);
     }
 
     function addWashToTable(wash, index) {
@@ -139,12 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalCarsSpan.textContent = totalCars;
     }
 
-    function closeRegister() {
-        if (isRegisterClosed) {
-            alert("O caixa já foi fechado.");
-            return;
-        }
-        isRegisterClosed = true;
+    function displayClosedState() {
         closeRegisterButton.disabled = true; 
         closeRegisterButton.innerHTML = '<i class="fas fa-lock-open"></i> Caixa Fechado'; 
 
@@ -216,10 +221,98 @@ document.addEventListener('DOMContentLoaded', () => {
         liveSummaryDiv.style.display = 'none';
 
         console.log("Caixa fechado. Totals by Payment:", totalsByPayment, "Pending:", {total: pendingPaymentTotal, count: pendingPaymentCount});
-
     }
 
-    updateLiveTotals();
-    paymentSummaryDiv.style.display = 'none';
-    registerSummaryDiv.style.display = 'none'; 
+    function displayOpenState() {
+        closeRegisterButton.disabled = false; 
+        closeRegisterButton.innerHTML = '<i class="fas fa-lock"></i> Fechar Caixa'; 
+
+        addWashButton.disabled = false;
+        document.querySelectorAll('.payment-select').forEach(select => select.disabled = false);
+        carNameInput.disabled = false;
+        washTypeSelect.disabled = false;
+
+        paymentSummaryDiv.style.display = 'none';
+        registerSummaryDiv.style.display = 'none';
+        liveSummaryDiv.style.display = 'block';
+    }
+
+    function closeRegister() {
+        if (isRegisterClosed) {
+            alert("O caixa já foi fechado.");
+            return;
+        }
+        isRegisterClosed = true;
+        displayClosedState();
+        saveData();
+    }
+
+    function addWash() {
+        if (isRegisterClosed) {
+            alert("O caixa já foi fechado. Reinicie o dia para adicionar novas lavagens.");
+            return;
+        }
+        const carName = carNameInput.value.trim();
+        const selectedOption = washTypeSelect.options[washTypeSelect.selectedIndex];
+        const washType = selectedOption.value;
+        const washPrice = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+
+        if (!carName) {
+            alert('Por favor, insira o nome ou placa do carro.');
+            carNameInput.focus();
+            return;
+        }
+        if (!washType || washPrice <= 0) {
+            alert('Por favor, selecione um tipo de lavagem válido.');
+            washTypeSelect.focus();
+            return;
+        }
+
+        const washRecord = {
+            id: Date.now(), 
+            car: carName,
+            type: washType,
+            price: washPrice,
+            paymentMethod: null
+        };
+
+        recordedWashes.push(washRecord);
+        const washIndex = recordedWashes.length - 1;
+
+        addWashToTable(washRecord, washIndex);
+        updateLiveTotals();
+        clearInputs();
+
+        console.log("Lavagem adicionada:", washRecord);
+        console.log("Lista atual:", recordedWashes);
+        saveData();
+    }
+
+    function resetDay() {
+        recordedWashes = [];
+        isRegisterClosed = false;
+        closeRegisterButton.disabled = false;
+        closeRegisterButton.innerHTML = '<i class="fas fa-lock"></i> Fechar Caixa';
+        addWashButton.disabled = false;
+        document.querySelectorAll('.payment-select').forEach(select => select.disabled = false);
+        carNameInput.disabled = false;
+        washTypeSelect.disabled = false;
+        paymentSummaryDiv.style.display = 'none';
+        registerSummaryDiv.style.display = 'none';
+        liveSummaryDiv.style.display = 'block';
+        washListTableBody.innerHTML = '';
+        totalRevenue = 0;
+        totalCars = 0;
+        totalRevenueSpan.textContent = 'R$ 0,00';
+        totalCarsSpan.textContent = '0';
+        carNameInput.value = '';
+        washTypeSelect.selectedIndex = 0;
+        saveData();
+    }
+
+    addWashButton.addEventListener('click', addWash);
+    closeRegisterButton.addEventListener('click', closeRegister);
+    resetDayButton.addEventListener('click', resetDay); 
+
+    loadData();
 });

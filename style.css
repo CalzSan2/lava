@@ -13,6 +13,7 @@
     --danger-hover: #9b2226; /* Darker Red */
     --info-color: #0077b6; /* Nice Blue for Info */
     --warning-color: #fca311; /* Bright Yellow/Orange */
+    --warning-hover: #e89202; /* Darker Yellow/Orange */
 
     /* Gradients & Shadows */
     --background-gradient: linear-gradient(135deg, #e0fbfc 0%, #edf6f9 100%); /* Lighter, airy background */
@@ -143,6 +144,19 @@ h2 i {
     background-color: var(--white-bg);
 }
 
+.button-group {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 25px; /* Space below the group */
+}
+
+.button-group .btn {
+    flex-grow: 1; /* Make buttons share space */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 0; /* Remove default bottom margin */
+    width: auto; /* Override previous width settings */
+}
+
 .btn {
     color: white;
     border: none;
@@ -178,7 +192,7 @@ h2 i {
 
 .btn-primary {
     background-color: var(--primary-color);
-    width: 100%;
+    width: 100%; /* Keep full width for the add button */
 }
 
 .btn-primary:hover {
@@ -187,12 +201,20 @@ h2 i {
 
 .btn-danger {
     background-color: var(--danger-color);
-    width: 100%;
-    margin-bottom: 25px; /* More space */
 }
 
 .btn-danger:hover {
     background-color: var(--danger-hover);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--dark-text); /* Better contrast on orange */
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-hover);
+    color: var(--dark-text);
 }
 
 .btn:disabled {
@@ -415,7 +437,6 @@ h2 i {
     }
     .container {
         margin: 20px auto;
-        /* No padding change needed as cards handle padding */
     }
 
     h1 {
@@ -435,6 +456,13 @@ h2 i {
         padding: 12px 22px;
         font-size: 1em;
     }
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+     .button-group .btn {
+        width: 100%; /* Make buttons full width when stacked */
+     }
 
     #washTable th, #washTable td {
         padding: 12px 14px; /* Reduce padding */
@@ -518,13 +546,24 @@ h2 i {
 
     .btn {
         width: 100%; /* Full width buttons on small screens */
-        margin-bottom: 15px;
+        margin-bottom: 15px; /* Added back margin for primary button */
         font-size: 0.95em;
         padding: 12px 20px;
     }
     .btn:last-child {
         margin-bottom: 0;
     }
+     .btn-primary {
+        margin-bottom: 15px; /* Ensure space below add button */
+     }
+
+     .button-group {
+        margin-bottom: 20px;
+     }
+     .button-group .btn {
+        margin-bottom: 0; /* Remove margin when in group */
+        width: 100%; /* Ensure full width */
+     }
 
     .total-section .summary {
         padding: 15px;

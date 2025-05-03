@@ -55,13 +55,16 @@
 
         <section class="total-section card">
              <h2><i class="fas fa-cash-register"></i> Resumo do Caixa</h2>
-            <button id="closeRegister" class="btn btn-danger"><i class="fas fa-lock"></i> Fechar Caixa</button>
+            <div class="button-group">
+                 <button id="closeRegister" class="btn btn-danger"><i class="fas fa-lock"></i> Fechar Caixa</button>
+                 <button id="resetDay" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Reiniciar Dia</button>
+            </div>
              <div id="registerSummary" class="summary" style="margin-top: 15px; background-color: #fff3e0; border-left-color: var(--warning-color); display: none;">
                  <!-- General closing summary will appear here -->
                  <h3>Resumo Geral (Caixa Fechado)</h3>
                  <div id="registerSummaryDetails"></div>
              </div>
-            <div class="summary" id="liveSummary"> 
+            <div class="summary" id="liveSummary">
                 <p>Total de Carros Registrados: <strong id="totalCars">0</strong></p>
                 <p>Total Arrecadado (Estimado): R$ <strong id="totalRevenue">0,00</strong></p>
             </div>
