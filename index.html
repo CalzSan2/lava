@@ -1,81 +1,1151 @@
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lava Rápido Pro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lava Rápido Pro</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+
+
+
+<style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+:root {
+    --primary-color: #3a86ff; /* Vibrant Blue */
+    --primary-hover: #2667cc; /* Darker Blue */
+    --secondary-color: #ffbe0b; /* Bright Yellow */
+    --accent-color: #fb5607; /* Vibrant Orange */
+    --light-bg: #f8f9fa;
+    --white-bg: #ffffff;
+    --dark-text: #212529;
+    --medium-text: #495057;
+    --border-color: #dee2e6;
+    --success-color: #38b000; /* Brighter Green */
+    --danger-color: #ff006e; /* Pinkish Red */
+    --danger-hover: #d1005a;
+    --info-color: #8338ec; /* Purple */
+    --warning-color: #ffbe0b; /* Yellow */
+    --warning-hover: #e6a800;
+
+    /* Gradients & Shadows */
+    --background-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --card-shadow: 0 10px 25px rgba(58, 134, 255, 0.15);
+    --card-hover-shadow: 0 15px 30px rgba(58, 134, 255, 0.2);
+    --input-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* Typography & Layout */
+    --border-radius: 10px;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background-gradient);
+    margin: 0;
+    padding: 20px;
+    color: var(--dark-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 950px; /* Slightly wider */
+    margin: 40px auto;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--white-bg);
+    padding: 30px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('http://static.photos/automotive/1200x630/1') center/cover;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+header > * {
+    position: relative;
+    z-index: 1;
+}
+
+.header-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    display: block;
+    color: var(--white-bg);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 3em;
+    margin: 0;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+h2 {
+    color: var(--primary-color);
+    text-align: left;
+    margin-bottom: 30px; /* More space */
+    font-weight: 600;
+    font-size: 1.8em; /* Larger */
+    border-bottom: 3px solid var(--accent-color); /* Accent color border */
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+h2 i {
+    margin-right: 12px;
+    font-size: 1em; /* Adjusted size relative to h2 */
+    color: var(--accent-color); /* Match border */
+}
+
+.card {
+    background-color: var(--white-bg);
+    margin-bottom: 35px;
+    padding: 35px;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+}
+
+.input-group {
+    margin-bottom: 25px; /* More space */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px; /* More space */
+    font-weight: 500; /* Slightly lighter weight */
+    color: var(--medium-text);
+    font-size: 1em; /* Slightly larger */
+}
+
+.input-group label i {
+    margin-right: 8px;
+    width: 18px;
+    text-align: center;
+    color: var(--primary-color); /* Icon color */
+}
+
+.input-group input[type="text"],
+.input-group select {
+    width: 100%;
+    padding: 14px 18px; /* More padding */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Slightly rounder */
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--light-bg); /* Subtle input background */
+    box-shadow: var(--input-shadow);
+}
+
+.input-group input[type="text"]:focus,
+.input-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.2); /* Adjusted focus ring */
+    outline: none;
+    background-color: var(--white-bg);
+}
+
+.button-group {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 25px; /* Space below the group */
+}
+
+.button-group .btn {
+    flex-grow: 1; /* Make buttons share space */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 0; /* Remove default bottom margin */
+    width: auto; /* Override previous width settings */
+}
+
+.btn {
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+.btn i {
+    margin-right: 10px; /* More space */
+}
+
+.btn:hover {
+    transform: translateY(-3px); /* Slightly more hover effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    width: 100%; /* Keep full width for the add button */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--dark-text); /* Better contrast on orange */
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-hover);
+    color: var(--dark-text);
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--input-shadow); /* Subtle shadow on table container */
+}
+
+#washTable {
+    width: 100%;
+    border-collapse: collapse; /* Changed to collapse for cleaner lines */
+    margin-top: 0; /* Removed margin as container handles spacing */
+    border-radius: 0; /* Handled by container */
+    overflow: hidden;
+    border: none; /* Handled by container */
+}
+
+#washTable th, #washTable td {
+    padding: 18px 20px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background-color 0.2s ease;
+}
+
+#washTable th {
+    background: linear-gradient(to right, var(--primary-color), var(--info-color));
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#washTable th {
+    background-color: var(--primary-color); /* Darker header */
+    font-weight: 600;
+    color: var(--white-bg); /* White text */
+    text-transform: uppercase;
+    font-size: 0.95em;
+    letter-spacing: 0.6px;
+}
+
+#washTable th i {
+    margin-right: 8px;
+    opacity: 0.8;
+}
+
+/* Remove border from last row */
+#washTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#washTable tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+#washTable tbody tr:nth-child(even) {
+    background-color: var(--light-bg);
+}
+
+#washTable tbody tr:hover {
+    background-color: rgba(58, 134, 255, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#washTable td:nth-last-child(2) { /* Price column */
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color); /* Make price stand out */
+    font-size: 1.05em;
+}
+
+#washTable td:last-child { /* Actions column */
+   min-width: 200px; /* More space for select/text */
+   text-align: center;
+   padding: 10px 15px; /* Slightly less vertical padding for controls */
+}
+
+.payment-select {
+    padding: 10px 15px; /* Adjusted padding */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95em;
+    cursor: pointer;
+    background-color: var(--accent-color); /* Use accent for action */
+    color: var(--dark-text); /* Dark text on light accent */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+    box-shadow: var(--input-shadow);
+}
+
+.payment-select:hover {
+     background-color: #ffb703; /* Slightly lighter accent */
+     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(238, 155, 0, 0.3); /* Focus ring related to accent */
+    outline: none;
+}
+
+.payment-select option {
+    background-color: white;
+    color: var(--dark-text);
+}
+
+.payment-selected-text {
+    font-weight: 600;
+    font-size: 0.95em;
+    padding: 6px 10px; /* Adjusted padding */
+    border-radius: 6px;
+    display: inline-block; /* Ensures padding applies correctly */
+    border: 1px solid transparent;
+    text-align: center;
+    min-width: 100px; /* Ensure consistent width */
+}
+
+/* Updated payment method styles with new palette */
+.payment-selected-text.dinheiro { background-color: #daf5f1; color: var(--success-color); border-color: var(--success-color);}
+.payment-selected-text.pix { background-color: #e0f2fe; color: var(--info-color); border-color: var(--info-color); }
+.payment-selected-text.cartao-debito { background-color: #fff8e1; color: #f57c00; border-color: #f57c00; } /* Adjusted orange */
+.payment-selected-text.cartao-credito { background-color: #f3e5f5; color: #8e24aa; border-color: #8e24aa; } /* Adjusted purple */
+.payment-selected-text.pista { background-color: #e8f5e9; color: #2e7d32; border-color: #2e7d32; } /* Green for Pista */
+.payment-selected-text.pending { background-color: #fffde7; color: var(--warning-color); border-color: var(--warning-color);}
+
+
+/* Total Section Styling */
+.total-section .summary {
+    text-align: right;
+    margin-top: 25px; /* More space */
+    padding: 25px; /* More padding */
+    background-color: var(--white-bg); /* Use white bg like cards */
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    border-left: 6px solid var(--success-color); /* Thicker border */
+    box-shadow: var(--input-shadow);
+}
+
+.total-section .summary p {
+    margin: 12px 0; /* More vertical space */
+    font-size: 1.15em; /* Slightly larger */
+    color: var(--medium-text); /* Use medium text color */
+}
+
+.total-section .summary strong {
+    font-weight: 700;
+    font-size: 1.25em; /* Larger total */
+    color: var(--success-color);
+    margin-left: 10px; /* Space between label and value */
+}
+
+/* Payment Summary Details */
+#paymentSummary {
+     margin-top: 20px;
+     padding: 25px;
+     background-color: #e0f2fe; /* Light blue background */
+     border-left: 6px solid var(--info-color); /* Blue border */
+     border-radius: var(--border-radius);
+     box-shadow: var(--input-shadow);
+     display: none; /* Keep initial state */
+}
+
+#paymentSummary h3 {
+    color: var(--info-color); /* Match border color */
+    margin-top: 0; /* Remove default margin */
+    margin-bottom: 15px;
+    font-size: 1.3em; /* Slightly larger */
+    border-bottom: 2px solid rgba(0, 119, 182, 0.2); /* Subtle underline */
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+#paymentDetails p {
+    margin: 8px 0;
+    font-size: 1.05em; /* Slightly larger */
+    color: var(--dark-text);
+}
+#paymentDetails strong {
+     color: var(--info-color);
+     font-weight: 600;
+     margin-left: 5px;
+}
+
+/* Style for the new Register Summary section */
+#registerSummary {
+     margin-top: 20px;
+     padding: 25px;
+     background-color: #fff3e0; /* Light orange background */
+     border-left: 6px solid var(--warning-color); /* Orange border */
+     border-radius: var(--border-radius);
+     box-shadow: var(--input-shadow);
+     display: none; /* Initially hidden */
+}
+
+#registerSummary h3 {
+    color: var(--warning-color); /* Match border color */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    border-bottom: 2px solid rgba(252, 163, 17, 0.2); /* Subtle orange underline */
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+#registerSummaryDetails p {
+    margin: 8px 0;
+    font-size: 1.05em;
+    color: var(--dark-text);
+}
+
+#registerSummaryDetails strong {
+     color: var(--danger-color); /* Use a different color for emphasis, e.g., danger */
+     font-weight: 600;
+     margin-left: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        padding-bottom: 10px;
+    }
+
+    .card {
+        padding: 25px; /* Slightly reduce padding */
+    }
+
+    .btn {
+        padding: 12px 22px;
+        font-size: 1em;
+    }
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+     .button-group .btn {
+        width: 100%; /* Make buttons full width when stacked */
+     }
+
+    #washTable th, #washTable td {
+        padding: 12px 14px; /* Reduce padding */
+    }
+
+    .total-section .summary {
+        padding: 20px;
+        text-align: left; /* Stack labels and values on mobile */
+    }
+     .total-section .summary p {
+        font-size: 1.1em;
+     }
+     .total-section .summary strong {
+        display: block; /* Stack value below label */
+        margin-left: 0;
+        margin-top: 5px;
+        font-size: 1.2em;
+    }
+    #paymentSummary {
+        padding: 20px;
+    }
+     #paymentSummary h3 {
+        font-size: 1.2em;
+     }
+     #paymentDetails p {
+        font-size: 1em;
+     }
+     #registerSummary {
+        padding: 20px;
+     }
+     #registerSummary h3 {
+        font-size: 1.2em;
+     }
+     #registerSummaryDetails p {
+        font-size: 1em;
+     }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        line-height: 1.6;
+    }
+
+    .container {
+        margin: 10px auto;
+    }
+
+     header {
+        padding: 15px;
+        margin-bottom: 30px;
+     }
+     .header-icon {
+        font-size: 3rem;
+     }
+     h1 {
+        font-size: 1.9em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+        margin-bottom: 20px;
+    }
+    h2 i {
+        margin-right: 8px;
+    }
+
+    .card {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .input-group label {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+     .input-group input[type="text"],
+     .input-group select {
+        padding: 12px 15px;
+     }
+
+    .btn {
+        width: 100%; /* Full width buttons on small screens */
+        margin-bottom: 15px; /* Added back margin for primary button */
+        font-size: 0.95em;
+        padding: 12px 20px;
+    }
+    .btn:last-child {
+        margin-bottom: 0;
+    }
+     .btn-primary {
+        margin-bottom: 15px; /* Ensure space below add button */
+     }
+
+     .button-group {
+        margin-bottom: 20px;
+     }
+     .button-group .btn {
+        margin-bottom: 0; /* Remove margin when in group */
+        width: 100%; /* Ensure full width */
+     }
+
+    .total-section .summary {
+        padding: 15px;
+        border-left-width: 5px;
+    }
+     .total-section .summary p {
+        font-size: 1em;
+    }
+     .total-section .summary strong {
+        font-size: 1.1em;
+    }
+    #paymentSummary {
+        padding: 15px;
+        border-left-width: 5px;
+    }
+     #paymentSummary h3 {
+        font-size: 1.1em;
+     }
+     #paymentDetails p {
+        font-size: 0.95em;
+     }
+     #registerSummary {
+        padding: 15px;
+        border-left-width: 5px;
+     }
+     #registerSummary h3 {
+        font-size: 1.1em;
+     }
+     #registerSummaryDetails p {
+        font-size: 0.95em;
+     }
+
+     #washTable td:last-child { /* Actions column */
+       min-width: 160px; /* Reduce min-width slightly */
+    }
+    .payment-select {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
+    .payment-selected-text {
+        font-size: 0.9em;
+        padding: 5px 8px;
+        min-width: 90px;
+    }
+}</style></head>
 <body>
-    <div class="container">
-        <header>
-            <i class="fas fa-car-wash header-icon"></i>
-            <h1>Meu Lava Rápido</h1>
-        </header>
-
-        <section class="form-section card">
-            <h2><i class="fas fa-plus-circle"></i> Registrar Nova Lavagem</h2>
-            <div class="input-group">
-                <label for="carName"><i class="fas fa-car"></i> Nome/Placa do Carro:</label>
-                <input type="text" id="carName" placeholder="Ex: Fusca Azul / ABC-1234">
-            </div>
-            <div class="input-group">
-                <label for="washType"><i class="fas fa-soap"></i> Tipo de Lavagem:</label>
-                <select id="washType">
-                    <option value="" data-price="0">-- Selecione --</option>
-                    <option value="Ducha" data-price="10">Ducha (R$ 10,00)</option>
-                    <option value="Superducha" data-price="25">Superducha (R$ 25,00)</option>
-                    <option value="Completa" data-price="45">Completa (R$ 45,00)</option>
-                </select>
-            </div>
-            <button id="addWash" class="btn btn-primary"><i class="fas fa-check"></i> Adicionar Lavagem</button>
-        </section>
-
-        <section class="list-section card">
-            <h2><i class="fas fa-list-ul"></i> Lavagens Registradas</h2>
-            <div class="table-container">
-                <table id="washTable">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-car"></i> Carro</th>
-                            <th><i class="fas fa-soap"></i> Tipo</th>
-                            <th><i class="fas fa-dollar-sign"></i> Preço (R$)</th>
-                            <th><i class="fas fa-credit-card"></i> Ações / Pagamento</th>
-                        </tr>
-                    </thead>
-                    <tbody id="washList">
-                        <!-- Lavagens adicionadas aqui -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="total-section card">
-             <h2><i class="fas fa-cash-register"></i> Resumo do Caixa</h2>
-            <div class="button-group">
-                 <button id="closeRegister" class="btn btn-danger"><i class="fas fa-lock"></i> Fechar Caixa</button>
-                 <button id="resetDay" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Reiniciar Dia</button>
-            </div>
-             <div id="registerSummary" class="summary" style="margin-top: 15px; background-color: #fff3e0; border-left-color: var(--warning-color); display: none;">
-                 <!-- General closing summary will appear here -->
-                 <h3>Resumo Geral (Caixa Fechado)</h3>
-                 <div id="registerSummaryDetails"></div>
-             </div>
-            <div class="summary" id="liveSummary">
-                <p>Total de Carros Registrados: <strong id="totalCars">0</strong></p>
-                <p>Total Arrecadado (Estimado): R$ <strong id="totalRevenue">0,00</strong></p>
-            </div>
-             <div id="paymentSummary" class="summary" style="margin-top: 15px; background-color: #e3f2fd; border-left-color: var(--info-color); display: none;">
-                 <!-- Detailed payment summary will appear here after closing register -->
-                 <h3>Detalhes por Pagamento:</h3>
-                 <div id="paymentDetails"></div>
-             </div>
-        </section>
+<div class="container">
+<header>
+<i class="fas fa-car-wash header-icon"></i>
+<h1>Meu Lava Rápido</h1>
+</header>
+<section class="form-section card">
+<h2><i class="fas fa-plus-circle"></i> Registrar Nova Lavagem</h2>
+<div class="input-group">
+<label for="carName"><i class="fas fa-car"></i> Nome/Placa do Carro:</label>
+<input id="carName" placeholder="Ex: Fusca Azul / ABC-1234" type="text"/>
+</div>
+<div class="input-group">
+    <label><i class="fas fa-spray-can"></i> Cera:</label>
+    <div style="display: flex; gap: 15px; margin-top: 5px;">
+        <label style="display: flex; align-items: center;">
+            <input type="radio" name="wax" value="sim" style="margin-right: 5px;"> Com Cera (+R$5,00)
+        </label>
+        <label style="display: flex; align-items: center;">
+            <input type="radio" name="wax" value="nao" checked style="margin-right: 5px;"> Sem Cera
+        </label>
     </div>
+</div>
+<div class="input-group">
+<label for="washType"><i class="fas fa-soap"></i> Tipo de Lavagem:</label>
+<select id="washType">
+<option data-price="0" value="">-- Selecione --</option>
+<option data-price="10" value="Ducha">Ducha (R$ 10,00)</option>
+<option data-price="25" value="Superducha">Superducha (R$ 25,00)</option>
+<option data-price="45" value="Completa">Completa (R$ 45,00)</option>
+<option value="personalizada">Personalizada</option>
+</select>
+<div id="customWashContainer" style="display: none; margin-top: 15px;">
+    <div class="input-group">
+        <label for="customWashName"><i class="fas fa-pen"></i> Nome da Lavagem:</label>
+        <input id="customWashName" placeholder="Ex: Lavagem Premium" type="text"/>
+    </div>
+    <div class="input-group">
+        <label for="customWashPrice"><i class="fas fa-dollar-sign"></i> Preço (R$):</label>
+        <input id="customWashPrice" placeholder="Ex: 50,00" type="number" min="0" step="0.01"/>
+    </div>
+</div>
+</div>
+<button class="btn btn-primary" id="addWash"><i class="fas fa-check"></i> Adicionar Lavagem</button>
+</section>
+<section class="list-section card">
+<h2><i class="fas fa-list-ul"></i> Lavagens Registradas</h2>
+<div class="table-container">
+<table id="washTable">
+<thead>
+<tr>
+<th><i class="fas fa-car"></i> Carro</th>
+<th><i class="fas fa-soap"></i> Tipo</th>
+<th><i class="fas fa-dollar-sign"></i> Preço (R$)</th>
+<th><i class="fas fa-credit-card"></i> Ações / Pagamento</th>
+</tr>
+</thead>
+<tbody id="washList">
+<!-- Lavagens adicionadas aqui -->
+</tbody>
+</table>
+</div>
+</section>
+<section class="total-section card">
+<h2><i class="fas fa-cash-register"></i> Resumo do Caixa</h2>
+<div class="button-group">
+<button class="btn btn-danger" id="closeRegister"><i class="fas fa-lock"></i> Fechar Caixa</button>
+<button class="btn btn-warning" id="resetDay"><i class="fas fa-undo-alt"></i> Reiniciar Dia</button>
+</div>
+<div class="summary" id="registerSummary" style="margin-top: 15px; background-color: #fff3e0; border-left-color: var(--warning-color); display: none;">
+<!-- General closing summary will appear here -->
+<h3>Resumo Geral (Caixa Fechado)</h3>
+<div id="registerSummaryDetails"></div>
+</div>
+<div class="summary" id="liveSummary">
+<p>Total de Carros Registrados: <strong id="totalCars">0</strong></p>
+<p>Total Arrecadado (Estimado): R$ <strong id="totalRevenue">0,00</strong></p>
+</div>
+<div class="summary" id="paymentSummary" style="margin-top: 15px; background-color: #e3f2fd; border-left-color: var(--info-color); display: none;">
+<!-- Detailed payment summary will appear here after closing register -->
+<h3>Detalhes por Pagamento:</h3>
+<div id="paymentDetails"></div>
+</div>
+</section>
+</div>
 
-    <script src="script.js"></script>
-</body>
+<footer style="text-align: center; margin-top: 30px; padding: 20px; color: var(--medium-text); font-size: 0.9em;">
+    <p>Desenvolvido por Renan Oliveira</p>
+    <a href="https://wa.me/5511953513188" class="btn btn-primary" style="margin-top: 10px; display: inline-flex; align-items: center;">
+        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Entrar em Contato
+    </a>
+</footer>
+
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const carNameInput = document.getElementById('carName');
+    const washTypeSelect = document.getElementById('washType');
+    const addWashButton = document.getElementById('addWash');
+    const washListTableBody = document.getElementById('washList');
+    const closeRegisterButton = document.getElementById('closeRegister');
+    const resetDayButton = document.getElementById('resetDay'); 
+    const totalRevenueSpan = document.getElementById('totalRevenue');
+    const totalCarsSpan = document.getElementById('totalCars');
+    const paymentSummaryDiv = document.getElementById('paymentSummary');
+    const paymentDetailsDiv = document.getElementById('paymentDetails');
+    const registerSummaryDiv = document.getElementById('registerSummary');
+    const registerSummaryDetailsDiv = document.getElementById('registerSummaryDetails');
+    const liveSummaryDiv = document.getElementById('liveSummary');
+
+    const STORAGE_KEY_WASHES = 'carWashApp_washes';
+    const STORAGE_KEY_STATE = 'carWashApp_state';
+
+    let recordedWashes = [];
+    let totalRevenue = 0;
+    let totalCars = 0;
+    let isRegisterClosed = false;
+
+    function saveData() {
+        try {
+            localStorage.setItem(STORAGE_KEY_WASHES, JSON.stringify(recordedWashes));
+            localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify({ isRegisterClosed }));
+        } catch (e) {
+            console.error("Failed to save data to localStorage", e);
+            alert("Não foi possível salvar os dados. O armazenamento local pode estar cheio ou indisponível.");
+        }
+    }
+
+    function loadData() {
+        try {
+            const savedWashes = localStorage.getItem(STORAGE_KEY_WASHES);
+            const savedState = localStorage.getItem(STORAGE_KEY_STATE);
+
+            if (savedWashes) {
+                recordedWashes = JSON.parse(savedWashes);
+            } else {
+                recordedWashes = [];
+            }
+
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                isRegisterClosed = state.isRegisterClosed || false;
+            } else {
+                isRegisterClosed = false;
+            }
+
+            washListTableBody.innerHTML = ''; 
+            recordedWashes.forEach((wash, index) => addWashToTable(wash, index));
+
+            updateLiveTotals();
+
+            if (isRegisterClosed) {
+                displayClosedState(); 
+            } else {
+                displayOpenState(); 
+            }
+
+        } catch (e) {
+            console.error("Failed to load data from localStorage", e);
+            recordedWashes = [];
+            isRegisterClosed = false;
+            alert("Não foi possível carregar os dados salvos. Começando um novo dia.");
+            localStorage.removeItem(STORAGE_KEY_WASHES);
+            localStorage.removeItem(STORAGE_KEY_STATE);
+        }
+    }
+
+    function addWashToTable(wash, index) {
+        const newRow = washListTableBody.insertRow();
+        newRow.dataset.washId = wash.id;
+
+        const cellCar = newRow.insertCell();
+        const cellType = newRow.insertCell();
+        const cellPrice = newRow.insertCell();
+        const cellActions = newRow.insertCell();
+
+        cellCar.textContent = wash.car;
+        cellType.textContent = wash.type;
+        cellPrice.textContent = formatCurrency(wash.price);
+        cellPrice.style.textAlign = 'right';
+
+        const paymentSelect = document.createElement('select');
+        paymentSelect.classList.add('payment-select');
+        paymentSelect.dataset.washIndex = index; 
+
+        paymentSelect.innerHTML = `
+            <option value="">-- Pagar com --</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão - Débito">Cartão - Débito</option>
+            <option value="Cartão - Crédito">Cartão - Crédito</option>
+            <option value="Pista">Pista</option>
+        `;
+
+        paymentSelect.addEventListener('change', handlePaymentSelection);
+
+        cellActions.appendChild(paymentSelect);
+    }
+
+    function handlePaymentSelection(event) {
+        if (isRegisterClosed) {
+            alert("O caixa já foi fechado. Não é possível alterar o pagamento.");
+            event.target.value = recordedWashes[parseInt(event.target.dataset.washIndex, 10)].paymentMethod || "";
+            return;
+        }
+        const selectElement = event.target;
+        const selectedPaymentMethod = selectElement.value;
+        const washIndex = parseInt(selectElement.dataset.washIndex, 10);
+
+        if (!selectedPaymentMethod || isNaN(washIndex) || washIndex < 0 || washIndex >= recordedWashes.length) {
+             console.error("Invalid wash index or payment method", washIndex, selectedPaymentMethod);
+            return;
+        }
+
+        recordedWashes[washIndex].paymentMethod = selectedPaymentMethod;
+        console.log("Pagamento atualizado:", recordedWashes[washIndex]);
+
+        const cellActions = selectElement.parentNode;
+        cellActions.innerHTML = ''; 
+
+        const paymentText = document.createElement('span');
+        paymentText.textContent = selectedPaymentMethod;
+        paymentText.classList.add('payment-selected-text');
+        const methodClass = selectedPaymentMethod.toLowerCase().replace(/[^a-z0-9]+/g, '-'); 
+        paymentText.classList.add(methodClass);
+
+        cellActions.appendChild(paymentText);
+    }
+
+    function clearInputs() {
+        carNameInput.value = '';
+        washTypeSelect.selectedIndex = 0;
+        carNameInput.focus();
+    }
+
+    function formatCurrency(value) {
+        return value.toFixed(2).replace('.', ',');
+    }
+
+    function updateLiveTotals() {
+        totalCars = recordedWashes.length;
+        totalRevenue = recordedWashes.reduce((sum, wash) => sum + wash.price, 0);
+
+        totalRevenueSpan.textContent = formatCurrency(totalRevenue);
+        totalCarsSpan.textContent = totalCars;
+    }
+
+    function displayClosedState() {
+        closeRegisterButton.disabled = true; 
+        closeRegisterButton.innerHTML = '<i class="fas fa-lock-open"></i> Caixa Fechado'; 
+
+        addWashButton.disabled = true;
+        document.querySelectorAll('.payment-select').forEach(select => select.disabled = true);
+        carNameInput.disabled = true;
+        washTypeSelect.disabled = true;
+
+        let totalsByPayment = {
+            'Dinheiro': { total: 0, count: 0, waxCount: 0 },
+            'Pix': { total: 0, count: 0, waxCount: 0 },
+            'Cartão - Débito': { total: 0, count: 0, waxCount: 0 },
+            'Cartão - Crédito': { total: 0, count: 0, waxCount: 0 },
+            'Pista': { total: 0, count: 0, waxCount: 0 }
+        };
+        let pendingPaymentCount = 0;
+        let pendingPaymentTotal = 0;
+        let paidTotalRevenue = 0;
+        let paidCarsCount = 0;
+
+        recordedWashes.forEach(wash => {
+            if (wash.paymentMethod && totalsByPayment.hasOwnProperty(wash.paymentMethod)) {
+                totalsByPayment[wash.paymentMethod].total += wash.price;
+                totalsByPayment[wash.paymentMethod].count++;
+                if (wash.hasWax) {
+                    totalsByPayment[wash.paymentMethod].waxCount++;
+                }
+                paidTotalRevenue += wash.price;
+                paidCarsCount++;
+            } else {
+                const row = washListTableBody.querySelector(`tr[data-wash-id='${wash.id}']`);
+                if(row && row.cells.length > 3 && row.cells[3].querySelector('.payment-select')) {
+                    row.cells[3].innerHTML = '<span class="payment-selected-text pending">Pendente</span>';
+                }
+                pendingPaymentCount++;
+                pendingPaymentTotal += wash.price;
+            }
+        });
+
+        let paymentDetailsHtml = '';
+        let hasPaymentDetails = false;
+        for (const method in totalsByPayment) {
+            if (totalsByPayment[method].count > 0) {
+                paymentDetailsHtml += `<p>${method}: <strong>R$ ${formatCurrency(totalsByPayment[method].total)}</strong> (${totalsByPayment[method].count} carro(s), ${totalsByPayment[method].waxCount} com cera)</p>`;
+                hasPaymentDetails = true;
+            }
+        }
+
+        if (pendingPaymentCount > 0) {
+             paymentDetailsHtml += `<p style="color: var(--danger-color);">Pagamento Pendente: <strong>R$ ${formatCurrency(pendingPaymentTotal)}</strong> (${pendingPaymentCount} carro(s))</p>`;
+            hasPaymentDetails = true;
+        }
+
+        if (hasPaymentDetails) {
+            paymentDetailsDiv.innerHTML = paymentDetailsHtml;
+            paymentSummaryDiv.style.display = 'block';
+        } else if (recordedWashes.length > 0) { 
+            paymentDetailsDiv.innerHTML = `<p>Nenhuma lavagem foi paga.</p><p style="color: var(--danger-color);">Total Pendente: <strong>R$ ${formatCurrency(pendingPaymentTotal)}</strong> (${pendingPaymentCount} carro(s))</p>`;
+            paymentSummaryDiv.style.display = 'block';
+        } else {
+             paymentDetailsDiv.innerHTML = '<p>Nenhuma lavagem registrada.</p>';
+             paymentSummaryDiv.style.display = 'block'; 
+        }
+
+        let registerSummaryHtml = '';
+        const waxCount = recordedWashes.filter(wash => wash.hasWax).length;
+        registerSummaryHtml += `<p>Total de Carros Atendidos: <strong>${totalCars}</strong> (${waxCount} com cera)</p>`;
+        registerSummaryHtml += `<p>Receita Total (Paga): <strong>R$ ${formatCurrency(paidTotalRevenue)}</strong> (${paidCarsCount} carro(s))</p>`;
+        registerSummaryHtml += `<p>Receita Pendente: <strong style="color: var(--danger-color);">R$ ${formatCurrency(pendingPaymentTotal)}</strong> (${pendingPaymentCount} carro(s))</p>`;
+
+        registerSummaryDetailsDiv.innerHTML = registerSummaryHtml;
+        registerSummaryDiv.style.display = 'block'; 
+
+        liveSummaryDiv.style.display = 'none';
+
+        console.log("Caixa fechado. Totals by Payment:", totalsByPayment, "Pending:", {total: pendingPaymentTotal, count: pendingPaymentCount});
+    }
+
+    function displayOpenState() {
+        closeRegisterButton.disabled = false; 
+        closeRegisterButton.innerHTML = '<i class="fas fa-lock"></i> Fechar Caixa'; 
+
+        addWashButton.disabled = false;
+        document.querySelectorAll('.payment-select').forEach(select => select.disabled = false);
+        carNameInput.disabled = false;
+        washTypeSelect.disabled = false;
+
+        paymentSummaryDiv.style.display = 'none';
+        registerSummaryDiv.style.display = 'none';
+        liveSummaryDiv.style.display = 'block';
+    }
+
+    function closeRegister() {
+        if (isRegisterClosed) {
+            alert("O caixa já foi fechado.");
+            return;
+        }
+        isRegisterClosed = true;
+        displayClosedState();
+        saveData();
+    }
+
+    function addWash() {
+        if (isRegisterClosed) {
+            alert("O caixa já foi fechado. Reinicie o dia para adicionar novas lavagens.");
+            return;
+        }
+        const carName = carNameInput.value.trim();
+        const selectedOption = washTypeSelect.options[washTypeSelect.selectedIndex];
+        let washType = selectedOption.value;
+        let washPrice = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+
+        if (washType === 'personalizada') {
+            const customName = document.getElementById('customWashName').value.trim();
+            const customPrice = parseFloat(document.getElementById('customWashPrice').value.replace(',', '.')) || 0;
+            
+            if (!customName) {
+                alert('Por favor, insira um nome para a lavagem personalizada.');
+                document.getElementById('customWashName').focus();
+                return;
+            }
+            if (customPrice <= 0) {
+                alert('Por favor, insira um preço válido para a lavagem personalizada.');
+                document.getElementById('customWashPrice').focus();
+                return;
+            }
+            
+            washType = customName;
+            washPrice = customPrice;
+        }
+
+        if (!carName) {
+            alert('Por favor, insira o nome ou placa do carro.');
+            carNameInput.focus();
+            return;
+        }
+        if (!washType || washPrice <= 0) {
+            alert('Por favor, selecione um tipo de lavagem válido.');
+            washTypeSelect.focus();
+            return;
+        }
+
+        const hasWax = document.querySelector('input[name="wax"]:checked').value === 'sim';
+        const waxPrice = hasWax ? 5 : 0;
+        const totalPrice = washPrice + waxPrice;
+
+        const washRecord = {
+            id: Date.now(), 
+            car: carName,
+            type: washType,
+            price: totalPrice,
+            paymentMethod: null,
+            hasWax: hasWax
+        };
+
+        recordedWashes.push(washRecord);
+        const washIndex = recordedWashes.length - 1;
+
+        addWashToTable(washRecord, washIndex);
+        updateLiveTotals();
+        clearInputs();
+
+        console.log("Lavagem adicionada:", washRecord);
+        console.log("Lista atual:", recordedWashes);
+        saveData();
+    }
+
+    function resetDay() {
+        recordedWashes = [];
+        isRegisterClosed = false;
+        closeRegisterButton.disabled = false;
+        closeRegisterButton.innerHTML = '<i class="fas fa-lock"></i> Fechar Caixa';
+        addWashButton.disabled = false;
+        document.querySelectorAll('.payment-select').forEach(select => select.disabled = false);
+        carNameInput.disabled = false;
+        washTypeSelect.disabled = false;
+        paymentSummaryDiv.style.display = 'none';
+        registerSummaryDiv.style.display = 'none';
+        liveSummaryDiv.style.display = 'block';
+        washListTableBody.innerHTML = '';
+        totalRevenue = 0;
+        totalCars = 0;
+        totalRevenueSpan.textContent = 'R$ 0,00';
+        totalCarsSpan.textContent = '0';
+        carNameInput.value = '';
+        washTypeSelect.selectedIndex = 0;
+        saveData();
+    }
+
+    addWashButton.addEventListener('click', addWash);
+    closeRegisterButton.addEventListener('click', closeRegister);
+    resetDayButton.addEventListener('click', resetDay); 
+
+    washTypeSelect.addEventListener('change', function() {
+        const customContainer = document.getElementById('customWashContainer');
+        if (this.value === 'personalizada') {
+            customContainer.style.display = 'block';
+        } else {
+            customContainer.style.display = 'none';
+        }
+    });
+
+    loadData();
+});</script></body>
 </html>
